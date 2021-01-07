@@ -1,0 +1,7 @@
+.default {
+    color: blue
+}
+.active {
+    color: purple;
+    background-color: red;
+}
