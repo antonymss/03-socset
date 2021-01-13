@@ -1,20 +1,21 @@
 import React from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
-import {Message, MessageType} from "./Message/Message";
-import {dialogsPageType} from "../../App";
+import {Message} from "./Message/Message";
+import {DialogsPageType} from "../../redux/state";
 
-export type DialogsType = {
-    id: number
-    name: string
-}
+//
+// export type DialogsType = {
+//     id: number
+//     name: string
+// }
 // type MyDialogsType = {
 //     dialogs: Array<DialogsType>
 //     message: Array<MessageType>
 //     }
 
 type DialogType = {
-    state: dialogsPageType
+    state: DialogsPageType
 }
 
 
