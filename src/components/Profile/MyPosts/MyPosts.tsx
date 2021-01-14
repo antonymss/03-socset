@@ -18,25 +18,27 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
 
     // let postsElement = props.store.getState().profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
-    let postsElement = props.store.getState().profilePage.posts.map(p => <Post message={p.message}
-                                                                               likesCount={p.likesCount}/>)
+    let postsElement = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     let addPost = () => {
+        debugger
         // props.store.addPost()
         props.dispatch({type:'ADD-POST'})
     }
 
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        debugger
         // props.store.updateNewPostText(e.currentTarget.value)
-        props.dispatch({type:'UPDATE-NEW-POST-TEXT', newText: any })
+        props.dispatch({type:'UPDATE-NEW-POST-TEXT', newText: e.currentTarget.value })
     }
 
     return <div className={s.postsBlock}>
         <h3> My posts</h3>
         <div>
             <div>
-                <textarea onChange={onPostChange} value={props.store.getState().profilePage.newPostText}/>
+                {/*<textarea onChange={onPostChange} value={props.store.getState().profilePage.newPostText}/>*/}
+                <textarea onChange={onPostChange} value={props.newPostText}/>
             </div>
             <div>
                 <button onClick={addPost}> Add post</button>
