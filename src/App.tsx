@@ -8,7 +8,7 @@ import {Route} from 'react-router-dom';
 import {News} from './components/News/News';
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {StateType, StoreType} from "./redux/state";
+import {ActionType, StateType, StoreType} from "./redux/state";
 
 
 export type AppType = {
@@ -16,6 +16,7 @@ export type AppType = {
     state: StateType
     addPost: () => void
     updateNewPostText:  (text: string) => void
+    dispatch: (action:ActionType)=>void
 
 }
 const App = (props: AppType) => {
@@ -29,9 +30,10 @@ const App = (props: AppType) => {
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
                 <Route path='/profile' render={() => <Profile
-                    store={props.store}
-                    // state={props.state.profilePage}
-                    // newPostText={props.state.profilePage.newPostText}
+                    dispatch={props.store.dispatch.bind(props.store)}
+                    // store={props.store}
+                    profilePage={props.state.profilePage}
+                    newPostText={props.state.profilePage.newPostText}
                     // addPost={props.addPost}
                     // updateNewPostText={props.updateNewPostText}
                 />}/>

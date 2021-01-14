@@ -5,6 +5,7 @@ export type StoreType = {
     _callSubscriber: (state: StateType) => void
     subscribe: any
     getState: () => StateType
+    dispatch: (action:ActionType)=>void
 }
 export type StateType = {
     profilePage: ProfilePageType
@@ -32,6 +33,14 @@ export type PostsType = {
     message: string
     likesCount: number
 }
+type AddPostActionType = {
+    type:'ADD-POST'
+}
+type UpdateNewPostTextActionType = {
+    type:'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+export type ActionType = AddPostActionType | UpdateNewPostTextActionType
 
 let store: StoreType = {
     _state: {

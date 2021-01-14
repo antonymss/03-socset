@@ -1,17 +1,18 @@
 import React from 'react';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./Profileinfo/ProfileInfo";
-import store, {ProfilePageType, StoreType} from "../../redux/state";
+import store, {ActionType, ProfilePageType, StoreType} from "../../redux/state";
 
 // export type ProfilePageType = {
 //     posts: Array<PostsType>
 // }
 
 type ProfileType = {
-    store: StoreType
-    // profilePage: ProfilePageType
+    dispatch: (action:ActionType)=>void
+    // store: StoreType
+    profilePage: ProfilePageType
     // addPost: (postMessage: string) => void
-    // newPostText: string
+    newPostText: string
     // updateNewPostText: (newText: string) => void
 }
 
@@ -20,11 +21,12 @@ export const Profile: React.FC<ProfileType> = (props) => {
     return <div>
         <ProfileInfo/>
         <MyPosts
-            store={props.store}
-            // posts={props.profilePage.posts}
-            //      newPostText={props.newPostText}
-            //      addPost={store.addPost}
-            //      updateNewPostText={store.updateNewPostText}
+            // store={props.store}
+            dispatch={props.dispatch}
+            posts={props.profilePage.posts}
+                 newPostText={props.newPostText}
+                 // addPost={store.addPost}
+                 // updateNewPostText={store.updateNewPostText}
         />
     </div>
 }
