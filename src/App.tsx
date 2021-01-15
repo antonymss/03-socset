@@ -14,8 +14,6 @@ import {ActionType, StateType, StoreType} from "./redux/state";
 export type AppType = {
     store: StoreType
     state: StateType
-    // addPost: () => void
-    // updateNewPostText:  (text: string) => void
     dispatch: (action:ActionType)=>void
 
 }
