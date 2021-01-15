@@ -14,14 +14,12 @@ import {ActionType, StateType, StoreType} from "./redux/state";
 export type AppType = {
     store: StoreType
     state: StateType
-    addPost: () => void
-    updateNewPostText:  (text: string) => void
     dispatch: (action:ActionType)=>void
 
 }
 const App = (props: AppType) => {
     debugger
-// const state = props.store.getState()
+
     return (
 
         <div className='app-wrapper'>
@@ -31,11 +29,10 @@ const App = (props: AppType) => {
                 <Route path='/dialogs' render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
                 <Route path='/profile' render={() => <Profile
                     dispatch={props.store.dispatch.bind(props.store)}
-                    // store={props.store}
+
                     profilePage={props.state.profilePage}
                     newPostText={props.state.profilePage.newPostText}
-                    // addPost={props.addPost}
-                    // updateNewPostText={props.updateNewPostText}
+
                 />}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>

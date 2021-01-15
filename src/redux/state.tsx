@@ -1,3 +1,5 @@
+import {ChangeEvent} from "react";
+
 export type StoreType = {
     _state: StateType
     updateNewPostText: (newText: string) => void
@@ -33,14 +35,10 @@ export type PostsType = {
     message: string
     likesCount: number
 }
-type AddPostActionType = {
-    type:'ADD-POST'
-}
-type UpdateNewPostTextActionType = {
-    type:'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-export type ActionType = AddPostActionType | UpdateNewPostTextActionType
+export type ActionType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
+
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 let store: StoreType = {
     _state: {
@@ -93,7 +91,7 @@ let store: StoreType = {
         return this._state
     },
     dispatch(action){
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             {
                 let newPost: PostsType = {
                     id: 5,
@@ -104,7 +102,7 @@ let store: StoreType = {
                 this._state.profilePage.newPostText = ''
                 this._callSubscriber(this._state)
             }
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+        } else if (action.type === UPDATE_NEW_POST_TEXT){
             {
                 this._state.profilePage.newPostText = action.newText
                 this._callSubscriber(this._state)
@@ -112,6 +110,10 @@ let store: StoreType = {
         }
 
     }
+}
+export let addPostActionCreator = () => ({type: ADD_POST})as const
+export let updateNewPostTextActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    return {type: UPDATE_NEW_POST_TEXT, newText: e.currentTarget.value}as const
 }
 
 export default store
