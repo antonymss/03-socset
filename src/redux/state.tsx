@@ -17,6 +17,8 @@ export type StateType = {
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     message: Array<MessageType>
+    newMessageBody: string
+
 }
 export type MessageType = {
     id: number
@@ -39,6 +41,8 @@ export type ActionType = ReturnType<typeof addPostActionCreator> | ReturnType<ty
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let store: StoreType = {
     _state: {
@@ -63,8 +67,9 @@ let store: StoreType = {
                 {id: 2, message: 'How are you?'},
                 {id: 3, message: 'YO'},
                 {id: 4, message: 'YO'},
-                {id: 5, message: 'YO'},]
-        }
+                {id: 5, message: 'YO'}],
+            newMessageBody: ''
+        },
     },
     _callSubscriber() {
         console.log('state changed')
@@ -103,10 +108,16 @@ let store: StoreType = {
                 this._callSubscriber(this._state)
             }
         } else if (action.type === UPDATE_NEW_POST_TEXT){
-            {
                 this._state.profilePage.newPostText = action.newText
                 this._callSubscriber(this._state)
-            }
+        }else if (action.type === UPDATE_NEW_MESSAGE_BODY){
+            this._state.dialogsPage.newMessageBody = action.body
+            this._callSubscriber(this._state)
+        }else if (action.type === SEND_MESSAGE){
+            let body = this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.newMessageBody = ''
+            this._state.dialogsPage.message.push({id: 6, message: body})
+            this._callSubscriber(this._state)
         }
 
     }
