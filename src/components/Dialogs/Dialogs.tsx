@@ -4,15 +4,6 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPageType} from "../../redux/state";
 
-//
-// export type DialogsType = {
-//     id: number
-//     name: string
-// }
-// type MyDialogsType = {
-//     dialogs: Array<DialogsType>
-//     message: Array<MessageType>
-//     }
 
 type DialogType = {
     dialogsPage: DialogsPageType
