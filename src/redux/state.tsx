@@ -126,6 +126,10 @@ export let addPostActionCreator = () => ({type: ADD_POST})as const
 export let updateNewPostTextActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => {
     return {type: UPDATE_NEW_POST_TEXT, newText: e.currentTarget.value}as const
 }
+export let sendMessageCreator = () => ({type: SEND_MESSAG})as const
+export let updateNewMessageBodyCreator = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    return {type: UPDATE_NEW_MESSAGE_BODY, body: e.currentTarget.value}as const
+}
 
 export default store
 
