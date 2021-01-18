@@ -37,7 +37,11 @@ export type PostsType = {
     message: string
     likesCount: number
 }
-export type ActionType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
+export type ActionType =
+    ReturnType<typeof addPostActionCreator> |
+    ReturnType<typeof updateNewPostTextActionCreator> |
+    ReturnType<typeof sendMessageCreator> |
+    ReturnType<typeof updateNewMessageBodyCreator>
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -126,7 +130,7 @@ export let addPostActionCreator = () => ({type: ADD_POST})as const
 export let updateNewPostTextActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => {
     return {type: UPDATE_NEW_POST_TEXT, newText: e.currentTarget.value}as const
 }
-export let sendMessageCreator = () => ({type: SEND_MESSAG})as const
+export let sendMessageCreator = () => ({type: SEND_MESSAGE})as const
 export let updateNewMessageBodyCreator = (e: ChangeEvent<HTMLTextAreaElement>) => {
     return {type: UPDATE_NEW_MESSAGE_BODY, body: e.currentTarget.value}as const
 }
