@@ -13,10 +13,11 @@ type DialogType = {
 
 export const Dialogs: React.FC<DialogType> = (props) => {
 
-    let dialogsElements = props.store._state.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+    let state = props.store.getState().dialogsPage
 
-    let messagesElements = props.store._state.dialogsPage.message.map(m => <Message message={m.message} id={m.id}/>)
-    let newMessageBody = props.store._state.dialogsPage.newMessageBody
+    let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+    let messagesElements = state.message.map(m => <Message message={m.message} id={m.id}/>)
+    let newMessageBody = state.newMessageBody
     let onSendMessageClick = () => {
         props.store.dispatch(sendMessageCreator())
     }
