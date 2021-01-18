@@ -21,8 +21,8 @@ export const Dialogs: React.FC<DialogType> = (props) => {
         props.store.dispatch(sendMessageCreator())
     }
 let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>)=>{
-     let body = e.target.value
-    props.store.dispatch(updateNewMessageBodyCreator(body))
+     let body = e.currentTarget.value
+    props.store.dispatch(updateNewMessageBodyCreator(e))
 }
     return (
         <div className={s.dialogs}>
