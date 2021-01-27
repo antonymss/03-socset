@@ -1,6 +1,6 @@
 
 import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from "./profile-reducer";
-import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-teducer";
+import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 
 export type StoreType = {
