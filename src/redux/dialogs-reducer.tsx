@@ -1,6 +1,4 @@
-import {ActionType, DialogsPageType} from "./store";
-import {ChangeEvent} from "react";
-
+import {ActionType, DialogsPageType} from "./store"
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 const SEND_MESSAGE = 'SEND-MESSAGE';
@@ -24,20 +22,26 @@ let initialState = {
     }
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType) => {
+
+    let stateCopy
+
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.body
-            return state
+            return  {
+                ...state,
+                newMessageBody : action.text
+            }
         case SEND_MESSAGE:
-            let body = state.newMessageBody
-            state.newMessageBody = ''
-            state.message.push({id: 6, message: body})
-            return state
+            return  {
+                ...state,
+                newMessageBody : '',
+               message: [...state.message, {id: 7, message: state.newMessageBody}]
+            }
         default:
             return state
     }
 }
 export let sendMessageCreator = () => ({type: SEND_MESSAGE}) as const
-export let updateNewMessageBodyCreator = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    return {type: UPDATE_NEW_MESSAGE_BODY, body: e.currentTarget.value} as const
+export let updateNewMessageBodyCreator = (text: string)  => {
+    return {type: UPDATE_NEW_MESSAGE_BODY, text } as const
 }
