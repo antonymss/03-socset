@@ -3,6 +3,9 @@ import {ActionType} from "./store";
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+
 
 export type userType = {
     id: number,
@@ -10,20 +13,25 @@ export type userType = {
     name: string,
     status: string,
     location: {
-        city:string,
-        country:string
+        city: string,
+        country: string
     }
-    photos:any
+    photos: any
 }
 export type UsersType = {
-    users : userType []
+    users: userType []
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 
 let initialState = {
-    users: [
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 2
 
-    ],
 
 }
 
@@ -48,9 +56,14 @@ export const usersReducer = (state: UsersType = initialState, action: ActionType
                 })
             }
         case SET_USERS: {
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
         }
-
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage }
+        }
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, totalUsersCount: action.count }
+        }
         default:
             return state
     }
@@ -58,3 +71,5 @@ export const usersReducer = (state: UsersType = initialState, action: ActionType
 export let followAC = (userId: number) => ({type: FOLLOW, userId}) as const
 export let unfollowAC = (userId: number) => ({type: UNFOLLOW, userId}) as const
 export let setUsersAC = (users: userType []) => ({type: SET_USERS, users}) as const
+export let setCurrentPageAC = (currentPage: number) =>({type:SET_CURRENT_PAGE, currentPage}) as const
+export let setUsersTotalCountAC = (totalUsersCount: number) =>({type:SET_TOTAL_USERS_COUNT, count:totalUsersCount }) as const
