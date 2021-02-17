@@ -1,12 +1,13 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Post";
-import {PostsType} from "../../../redux/store";
+import {PostType} from "../../../redux/profile-reducer";
+
 
 
 
 export type MyPostsType = {
-    posts: Array<PostsType>
+    posts: Array<PostType>
     newPostText: string
     updateNewPostText: (e:ChangeEvent<HTMLTextAreaElement>)=> void
     addPost:()=> void
