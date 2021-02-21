@@ -7,7 +7,7 @@ import {usersReducer} from "./users-reducer";
 
 
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
@@ -15,9 +15,9 @@ let reducers = combineReducers({
 })
 
 
-let store = createStore(reducers)
+let store = createStore(rootReducer)
 export type StoreReduxType = typeof store
-export type ReducersType = ReturnType<typeof reducers>
+export type AppStateType = ReturnType<typeof rootReducer>
 
 
 export default store
