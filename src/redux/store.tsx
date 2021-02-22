@@ -1,15 +1,8 @@
-
-import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from "./profile-reducer";
+import {addPostActionCreator, profileReducer, setUserProfile, updateNewPostTextActionCreator} from "./profile-reducer";
 import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
-import {
-    followAC,
-    setCurrentPageAC,
-    setUsersAC,
-    setUsersTotalCountAC,
-    toggleIsFetchingAC,
-    unfollowAC
-} from "./users-reducer";
+import {follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollow} from "./users-reducer";
+
 
 export type StoreType = {
     _state: StateType
@@ -39,11 +32,13 @@ export type DialogsType = {
     id: number
     name: string
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
+    profile:any
+
 }
-export type PostsType = {
+type PostsType = {
     id: number
     message: string
     likesCount: number
@@ -53,12 +48,14 @@ export type ActionType =
     ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof sendMessageCreator> |
     ReturnType<typeof updateNewMessageBodyCreator> |
-    ReturnType<typeof followAC> |
-    ReturnType<typeof unfollowAC> |
-    ReturnType<typeof setUsersAC> |
-    ReturnType<typeof setCurrentPageAC> |
-    ReturnType<typeof setUsersTotalCountAC> |
-    ReturnType<typeof toggleIsFetchingAC>
+    ReturnType<typeof follow> |
+    ReturnType<typeof unfollow> |
+    ReturnType<typeof setUsers> |
+    ReturnType<typeof setCurrentPage> |
+    ReturnType<typeof setTotalUsersCount> |
+    ReturnType<typeof toggleIsFetching> |
+    ReturnType<typeof setUserProfile>
+
 
 
 let store: StoreType = {
@@ -68,7 +65,8 @@ let store: StoreType = {
                 {id: 1, message: 'Hi, how are you?', likesCount: 20},
                 {id: 2, message: 'It\'s my first post?', likesCount: 15}
             ],
-            newPostText: ''
+            newPostText: '',
+            profile:''
         },
         dialogsPage: {
             dialogs: [
