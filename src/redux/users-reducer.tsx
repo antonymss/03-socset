@@ -1,4 +1,6 @@
 import {ActionType} from "./store";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -98,3 +100,14 @@ export let toggleFollowingProgress = (isFetching: boolean, userId: number) => ({
     type: TOGGLE_IS_FOLLOWING_PROGRESS,
     isFetching, userId
 }) as const
+
+export const getUsersThunkCreator = (currentPage: number,pageSize: number )=>{
+    return (dispatch:Dispatch) => {
+    dispatch(toggleIsFetching(true))
+
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
+    })
+}}
