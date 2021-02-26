@@ -12,5 +12,22 @@ export const usersAPI = {
     getUsers : (currentPage = 1, pageSize = 50) => {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
-    }
+    },
+    follow(userId){
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+            withCredentials: true,
+            headers: {
+                'API-KEY': 'f43c8e0f-6e2c-4a5e-98bc-50c90085e302'
+            }
+        })
+    },
+    unfollow(userId){
+        return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+            withCredentials: true,
+            headers: {
+                'API-KEY': 'f43c8e0f-6e2c-4a5e-98bc-50c90085e302'
+            }
+        })
+    },
 }
+
