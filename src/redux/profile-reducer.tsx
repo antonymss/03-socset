@@ -1,5 +1,7 @@
 import {ActionType} from "./store";
 import {ChangeEvent} from "react";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -75,6 +77,9 @@ export const profileReducer = (state: InitialProfileStateType = initialState, ac
 }
 export let addPostActionCreator = () => ({type: ADD_POST} as const)
 export let setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
+export let getUserProfile = (userId:number) => (dispatch:Dispatch)=>{usersAPI.getProfile(userId).then(response => {
+    dispatch(setUserProfile(response.data))
+})}
 export let updateNewPostTextActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => {
     return {type: UPDATE_NEW_POST_TEXT, newText: e.currentTarget.value} as const
 }
