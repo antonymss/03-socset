@@ -12,24 +12,32 @@ import {Users} from "./Users";
 import {Preloader} from '../common/Preloader/Preloader';
 
 
-export type UsersContainerType = {
+export type MSTPType = {
     users: userType []
-    setUsers: (users: Array<userType>) => void
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    setCurrentPage: any
-    setTotalUsersCount: any
     isFetching: boolean
-    toggleIsFetching: (isFetching: boolean) => void
-    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
     followingInProgress: Array<any>
-    getUsers: (currentPage: number,pageSize:number)=> void
 }
 
-export class UsersContainer extends React.Component<UsersContainerType> {
+export type MDTPType = {
+    follow: (userID: number) => void
+    unfollow: (userID: number) => void
+    setCurrentPage: (currentPage: number) => void
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
+
+    // setUsers: (users: Array<userType>) => void
+    // setTotalUsersCount: any
+    // toggleIsFetching: (isFetching: boolean) => void
+}
+
+
+
+export type UsersPropsType = MSTPType & MDTPType
+
+class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
@@ -37,7 +45,7 @@ export class UsersContainer extends React.Component<UsersContainerType> {
     }
 
     onPageChanged = (pageNumber: number) => {
-
+        debugger
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
@@ -60,14 +68,14 @@ export class UsersContainer extends React.Component<UsersContainerType> {
 }
 
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: AppStateType): MSTPType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress:state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 
@@ -76,6 +84,8 @@ export default connect(mapStateToProps,
     {
         follow, unfollow,
         setCurrentPage,
-        toggleFollowingProgress, getUsers
+        toggleFollowingProgress,
+        getUsers
+
     })
 (UsersContainer)
