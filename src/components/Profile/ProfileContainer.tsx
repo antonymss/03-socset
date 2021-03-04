@@ -25,6 +25,7 @@ export type ProfilePropsType =MapStatePropsType & MapDispatchPropsType
 class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
+        debugger
         let userId = this.props.match.params.userId
         if (!userId){
             userId='2'
