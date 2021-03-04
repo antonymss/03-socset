@@ -21,7 +21,6 @@ export type AppType = {
 
 }
 const App = () => {
-    debugger
 
     return (
 
