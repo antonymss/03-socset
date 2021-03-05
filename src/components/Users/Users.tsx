@@ -3,6 +3,7 @@ import styles from "./users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import {userType} from "../../redux/users-reducer";
 import {NavLink} from 'react-router-dom';
+import {UsersPropsType} from "./UsersContainer";
 
 type UsersType = {
     currentPage: number
