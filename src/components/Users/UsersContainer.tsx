@@ -10,6 +10,7 @@ import {
 import {Users} from "./Users";
 
 import {Preloader} from '../common/Preloader/Preloader';
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 export type MSTPType = {
@@ -78,9 +79,9 @@ let mapStateToProps = (state: AppStateType): MSTPType => {
         followingInProgress: state.usersPage.followingInProgress,
     }
 }
+let withRedirect = withAuthRedirect(UsersContainer)
 
-
-export default connect(mapStateToProps,
+export default withAuthRedirect(connect(mapStateToProps,
     {
         follow, unfollow,
         setCurrentPage,
@@ -88,4 +89,4 @@ export default connect(mapStateToProps,
         getUsers
 
     })
-(UsersContainer)
+(withRedirect))
