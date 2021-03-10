@@ -1,10 +1,11 @@
 import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {ProfileType, getUserProfile} from "../../redux/profile-reducer";
+import {getUserProfile, ProfileType} from "../../redux/profile-reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 type PathParamsType = {
@@ -18,18 +19,18 @@ export type MapStatePropsType = {
 
 }
 type MapDispatchPropsType = {
-    getUserProfile: (userId:number) => void
+    getUserProfile: (userId: number) => void
 }
 
-export type ProfilePropsType =MapStatePropsType & MapDispatchPropsType
+export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 
 class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         debugger
         let userId = this.props.match.params.userId
-        if (!userId){
-            userId='2'
+        if (!userId) {
+            userId = '2'
         }
         this.props.getUserProfile(+userId)
     }
@@ -37,19 +38,21 @@ class ProfileContainer extends React.Component<PropsType> {
     render() {
 
 
-
         return <Profile {...this.props} profile={this.props.profile}/>
     }
 
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     profile: state.profilePage.profile
-
 })
 
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
+export default compose<React.ComponentType>(connect(mapStateToProps, {getUserProfile}), withRouter, withAuthRedirect)
+(ProfileContainer)
 
-export default withAuthRedirect(connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent))
+// let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
+//
+// export default withAuthRedirect(connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent))
