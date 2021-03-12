@@ -1,4 +1,10 @@
-import {addPostActionCreator, profileReducer, setUserProfile, updateNewPostTextActionCreator} from "./profile-reducer";
+import {
+    addPostActionCreator,
+    profileReducer,
+    setStatus,
+    setUserProfile,
+    updateNewPostTextActionCreator
+} from "./profile-reducer";
 import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {
@@ -45,6 +51,7 @@ type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
     profile: any
+    status: string
 
 }
 type PostsType = {
@@ -65,7 +72,8 @@ export type ActionType =
     ReturnType<typeof toggleIsFetching> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setAuthUserData> |
-    ReturnType<typeof toggleFollowingProgress>
+    ReturnType<typeof toggleFollowingProgress> |
+    ReturnType<typeof setStatus>
 
 
 let store: StoreType = {
@@ -76,7 +84,8 @@ let store: StoreType = {
                 {id: 2, message: 'It\'s my first post?', likesCount: 15}
             ],
             newPostText: '',
-            profile: ''
+            profile: '',
+            status:''
         },
         dialogsPage: {
             dialogs: [
