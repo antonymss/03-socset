@@ -10,7 +10,8 @@ export const Header = (props: HeaderContainerType ) => {
             src='https://yt3.ggpht.com/ytc/AAUvwnhcOYdTa8LLrCrXBvmGL2kd1pP1xiGLChGUaz4KGA=s48-c-k-c0xffffffff-no-rj-mo'/>
 
         <div className={s.loginBlock}>
-            {props.isAuth ? props.login :
+            {props.isAuth ?
+                <div> {props.login} - <button onClick={props.logout}>Log out</button> </div> :
                 <NavLink to={'/login'}>Login</NavLink>}
         </div>
     </header>
