@@ -1,11 +1,5 @@
-import {
-    addPostActionCreator,
-    profileReducer,
-    setStatus,
-    setUserProfile,
-    updateNewPostTextActionCreator
-} from "./profile-reducer";
-import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
+import {addPostActionCreator, profileReducer, setStatus, setUserProfile} from "./profile-reducer";
+import {dialogsReducer, sendMessageCreator} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {
     followSuccess,
@@ -21,8 +15,8 @@ import {setAuthUserData} from "./auth-reducer";
 
 export type StoreType = {
     _state: StateType
-    updateNewPostText: (newText: string) => void
-    addPost: () => void
+    // updateNewPostText: (newText: string) => void
+    // addPost: () => void
     _callSubscriber: (state: StateType) => void
     subscribe: any
     getState: () => StateType
@@ -36,7 +30,7 @@ export type StateType = {
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     message: Array<MessageType>
-    newMessageBody: string
+    // newMessageBody: string
 
 }
 export type MessageType = {
@@ -49,7 +43,7 @@ export type DialogsType = {
 }
 type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText: string
+    // newPostText: string
     profile: any
     status: string
 
@@ -61,9 +55,9 @@ type PostsType = {
 }
 export type ActionType =
     ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostTextActionCreator> |
+    // ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof sendMessageCreator> |
-    ReturnType<typeof updateNewMessageBodyCreator> |
+    // ReturnType<typeof updateNewMessageBodyCreator> |
     ReturnType<typeof followSuccess> |
     ReturnType<typeof unfollowSuccess> |
     ReturnType<typeof setUsers> |
@@ -83,7 +77,7 @@ let store: StoreType = {
                 {id: 1, message: 'Hi, how are you?', likesCount: 20},
                 {id: 2, message: 'It\'s my first post?', likesCount: 15}
             ],
-            newPostText: '',
+            // newPostText: '',
             profile: '',
             status:''
         },
@@ -102,28 +96,28 @@ let store: StoreType = {
                 {id: 3, message: 'YO'},
                 {id: 4, message: 'YO'},
                 {id: 5, message: 'YO'}],
-            newMessageBody: ''
+            // newMessageBody: ''
         },
         sidebar: {}
     },
     _callSubscriber() {
         console.log('state changed')
     },
-    addPost() {
-        let newPost: PostsType = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(newText: string) {
-        debugger
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
+    // addPost() {
+    //     let newPost: PostsType = {
+    //         id: 5,
+    //         message: this._state.profilePage.newPostText,
+    //         likesCount: 0
+    //     }
+    //     this._state.profilePage.posts.push(newPost)
+    //     // this._state.profilePage.newPostText = ''
+    //     this._callSubscriber(this._state)
+    // },
+    // updateNewPostText(newText: string) {
+    //     debugger
+    //     this._state.profilePage.newPostText = newText
+    //     this._callSubscriber(this._state)
+    // },
     subscribe(observer: any) {
         this._callSubscriber = observer
     },
