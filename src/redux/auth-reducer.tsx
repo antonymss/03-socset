@@ -42,7 +42,7 @@ export let setAuthUserData = (id: null | number, email: null | string, login: nu
     payload: {id, email, login,isAuth}
 }) as const
 export const getAuthUserData = () => (dispatch:Dispatch) => {
-    authAPI.me()
+    return authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {userId,email,login} = response.data.data
@@ -50,7 +50,7 @@ export const getAuthUserData = () => (dispatch:Dispatch) => {
             }
         })
 }
-type ThunkType = ThunkAction<void, AppStateType, unknown, ActionType>
+export type ThunkType = ThunkAction<void, AppStateType, unknown, ActionType>
 
 export const login = (email: string, password:string, rememberMe:boolean):ThunkType => (dispatch)=> {
 
