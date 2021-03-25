@@ -11,7 +11,6 @@ type PropsType = {
 }
 
 export const Profile = (props: PropsType) => {
-    debugger
     return <div>
         <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
         <MyPostContainer/>
