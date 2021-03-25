@@ -86,6 +86,7 @@ export let setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, 
 export let setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 export let getUserProfile = (userId: number) => (dispatch: Dispatch) => {
     usersAPI.getProfile(userId).then(response => {
+        debugger
         dispatch(setUserProfile(response.data))
     })
 }
