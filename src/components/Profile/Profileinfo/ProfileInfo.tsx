@@ -18,6 +18,7 @@ export const ProfileInfo = (props:ProfileInfoType) => {
         {/*<div>*/}
         {/*    <img src='https://www.w3schools.com/w3css/img_lights.jpg'/>*/}
         {/*</div>*/}
+        <h1>{props.profile.fullName}</h1>
         <div className={s.descriptionBlock}>
             <img src={props.profile.photos.large}/>
            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
