@@ -1,18 +1,17 @@
 import React from 'react';
-import { Preloader } from '../../common/Preloader/Preloader';
+import {Preloader} from '../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.css'
 import {ProfileType} from "../../../redux/profile-reducer";
-import {ProfileStatus} from "./ProfileStatus";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 
-type ProfileInfoType={
+type ProfileInfoType = {
     profile: ProfileType | null
     status: string
     updateStatus: string
 }
 
-export const ProfileInfo = (props:ProfileInfoType) => {
-    if(!props.profile){
+export const ProfileInfo = (props: ProfileInfoType) => {
+    if (!props.profile) {
         return <Preloader/>
     }
     return <div>
@@ -22,7 +21,7 @@ export const ProfileInfo = (props:ProfileInfoType) => {
         <h1>{props.profile.fullName}</h1>
         <div className={s.descriptionBlock}>
             <img src={props.profile.photos.large}/>
-           <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
         </div>
 
     </div>
