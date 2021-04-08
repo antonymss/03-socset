@@ -6,6 +6,7 @@ const ADD_POST = 'ADD-POST';
 // const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
+const DELETE_POST = 'DELETE_POST';
 
 
 export type PostType = {
@@ -77,13 +78,18 @@ export const profileReducer = (state: InitialProfileStateType = initialState, ac
                 ...state,
                 profile: action.profile
             }
+        case DELETE_POST:
+            return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
+
+
         default:
             return state
     }
 }
-export let addPostActionCreator = (newPostText:any) => ({type: ADD_POST, newPostText} as const)
+export let addPostActionCreator = (newPostText: any) => ({type: ADD_POST, newPostText} as const)
 export let setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export let setStatus = (status: string) => ({type: SET_STATUS, status} as const)
+export let deletePost = (postId: string | number) => ({type: DELETE_POST, postId} as const)
 export let getUserProfile = (userId: number) => (dispatch: Dispatch) => {
     usersAPI.getProfile(userId).then(response => {
         debugger
