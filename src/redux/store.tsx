@@ -1,4 +1,4 @@
-import {addPostActionCreator, profileReducer, setStatus, setUserProfile} from "./profile-reducer";
+import {addPostActionCreator, deletePost, profileReducer, setStatus, setUserProfile} from "./profile-reducer";
 import {dialogsReducer, sendMessageCreator} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {
@@ -69,7 +69,8 @@ export type ActionType =
     ReturnType<typeof setAuthUserData> |
     ReturnType<typeof toggleFollowingProgress> |
     ReturnType<typeof setStatus> |
-    ReturnType<typeof initializedSuccess>
+    ReturnType<typeof initializedSuccess>|
+    ReturnType<typeof deletePost>
 
 
 let store: StoreType = {
