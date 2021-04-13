@@ -17,6 +17,7 @@ export type MyPostsType = {
 export const MyPosts: React.FC<MyPostsType> = (props) => {
     let postsElement = [...props.posts].reverse().map(p => <Post message={p.message} likesCount={p.likesCount}/>)
     let onAddPost = (values:any) => {
+        debugger
         props.addPost(values.newPostText)
     }
     // let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
