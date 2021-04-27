@@ -16,6 +16,7 @@ type UsersType = {
     unfollow: (userID: number) => void
     toggleFollowingProgress: (isFetching: boolean, userId: number) => void
     followingInProgress: Array<any>
+
 }
 
 
@@ -38,7 +39,7 @@ export let Users = (props: UsersType) => {
 
         {/*</div>*/}
         <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged}
-                   totalUsersCount={props.totalUsersCount} pageSize={props.pageSize} />
+                   totalItemsCount={props.totalUsersCount} pageSize={props.pageSize} />
         {
             props.users.map(u => <User
                     user={u}
