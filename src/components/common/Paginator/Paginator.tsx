@@ -3,7 +3,6 @@ import styles from './Paginator.module.css'
 import cn from 'classnames'
 // classname библеотека позволяет писать неограниченное количество классов в ClassName через запятую.
 
-
 type PropsType = {
     totalItemsCount: number
     pageSize: number
